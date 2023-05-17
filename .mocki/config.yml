@@ -24,50 +24,47 @@ references:
   - type: collection
     id: todos
     data:
-      - id: "1"
-        description: "Todo 1"
+      - id: !Fake uuid
+        description: !Fake sentence
         completed: false
-      - id: "2"
-        description: "Todo 2"
+      - id: !Fake uuid
+        description: !Fake sentence
         completed: false
-      - id: "3"
-        description: "Todo 3"
+      - id: !Fake uuid
+        description: !Fake sentence
+        completed: false
+      - id: !Fake uuid
+        description: !Fake sentence
+        completed: false
+      - id: !Fake uuid
+        description: !Fake sentence
         completed: false
 endpoints:
-  - path: /todos
-    method: get
+  - path: /graphql
+    method: post
+    behavior: conditional
     responses:
       - statusCode: 200
+        condition:
+          operator: eq
+          comparand: body.operationName
+          value: GetTodos
         body:
-          $ref:
-            type: collection
-            id: todos
-  - path: /todos/:id
-    method: get
-    responses:
+          data:
+            todos:
+              $ref:
+                type: collection
+                id: todos
       - statusCode: 200
+        condition:
+          operator: eq
+          comparand: body.operationName
+          value: UpdateTodo
         body:
-          $ref:
-            type: collection
-            id: todos
-            find: id
-  - path: /todos/:id
-    method: put
-    behavior: update
-    request:
-      contentType: application/json
-      schema:
-        type: object
-        properties:
-          description:
-            type: string
-          completed:
-            type: boolean
-        required: ["description", "completed"]
-    responses:
-      - statusCode: 200
-        body:
-          $ref:
-            type: collection
-            id: todos
-            update: id
+          data:
+            updateTodo:
+              $ref:
+                type: collection
+                id: todos
+                update: id
+                set: body.variables
