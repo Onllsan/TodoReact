@@ -1,21 +1,39 @@
-name: mocki
-port: 4000
+# name: mocki
+# port: 4000
+# endpoints:
+#   - path: /graphql
+#     method: get
+#     responses:
+#       - statusCode: 200
+#         body:
+#           data:
+#             todos:
+#               - id: !Fake uuid
+#                 description: !Fake sentence
+#               - id: !Fake uuid
+#                 description: !Fake sentence
+#               - id: !Fake uuid
+#                 description: !Fake sentence
+#                 completed: false
+#               - id: !Fake uuid
+#                 description: !Fake sentence
+#               - id: !Fake uuid
+#                 description: !Fake sentence
 endpoints:
-  - path: /graphql
+  - path: /todos
     method: get
     responses:
       - statusCode: 200
         body:
-          data:
-            todos:
-              - id: !Fake uuid
-                description: !Fake sentence
-              - id: !Fake uuid
-                description: !Fake sentence
-              - id: !Fake uuid
-                description: !Fake sentence
-                completed: false
-              - id: !Fake uuid
-                description: !Fake sentence
-              - id: !Fake uuid
-                description: !Fake sentence
+          - id: !Fake uuid
+            description: !Fake words
+            completed: !Fake
+
+  - path: /todos/{id}
+    method: put
+    responses:
+      - statusCode: 200
+        body:
+          id: params.id
+          description: params.title
+          completed: params.completed
