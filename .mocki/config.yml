@@ -1,70 +1,20 @@
-# name: mocki
-# port: 4000
-# endpoints:
-#   - path: /graphql
-#     method: get
-#     responses:
-#       - statusCode: 200
-#         body:
-#           data:
-#             todos:
-#               - id: !Fake uuid
-#                 description: !Fake sentence
-#               - id: !Fake uuid
-#                 description: !Fake sentence
-#               - id: !Fake uuid
-#                 description: !Fake sentence
-#               - id: !Fake uuid
-#                 description: !Fake sentence
-#               - id: !Fake uuid
-#                 description: !Fake sentence
 name: mocki
-port: 3001
-references:
-  - type: collection
-    id: todos
-    data:
-      - id: !Fake uuid
-        description: !Fake sentence
-        completed: false
-      - id: !Fake uuid
-        description: !Fake sentence
-        completed: false
-      - id: !Fake uuid
-        description: !Fake sentence
-        completed: false
-      - id: !Fake uuid
-        description: !Fake sentence
-        completed: false
-      - id: !Fake uuid
-        description: !Fake sentence
-        completed: false
+port: 4000
 endpoints:
   - path: /graphql
-    method: post
-    behavior: conditional
+    method: get
     responses:
       - statusCode: 200
-        condition:
-          operator: eq
-          comparand: body.operationName
-          value: GetTodos
         body:
           data:
             todos:
-              $ref:
-                type: collection
-                id: todos
-      - statusCode: 200
-        condition:
-          operator: eq
-          comparand: body.operationName
-          value: UpdateTodo
-        body:
-          data:
-            updateTodo:
-              $ref:
-                type: collection
-                id: todos
-                update: id
-                set: body.variables
+              - id: !Fake uuid
+                description: !Fake sentence
+              - id: !Fake uuid
+                description: !Fake sentence
+              - id: !Fake uuid
+                description: !Fake sentence
+              - id: !Fake uuid
+                description: !Fake sentence
+              - id: !Fake uuid
+                description: !Fake sentence
