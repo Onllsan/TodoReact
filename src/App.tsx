@@ -1,7 +1,6 @@
 import { ApolloProvider } from "@apollo/client";
 import client from "./graphql/apollo";
-
-import TodoList from "./components/ToDoList";
+import TodoList from "./components/TodoList";
 
 function App() {
   return (

@@ -14,6 +14,7 @@ const GET_TODOS = gql`
 export interface Todo {
   id: string;
   description: string;
+  completed: boolean;
 }
 
 const TodoList: React.FC = () => {
@@ -24,10 +25,19 @@ const TodoList: React.FC = () => {
   if (error) return <p>Error :</p>;
 
   return (
-    <div className="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl m-4">
-      {data.todos.map((todo: Todo) => (
-        <TodoItem key={todo.id} todo={todo} />
-      ))}
+    <div className="flex items-center justify-center flex-col m-9">
+      <div className="container">
+        <div>
+          {data.todos.map((todo: Todo) => (
+            <div
+              key={todo.id}
+              className="flex items-center justify-between mb-6 bg-white rounded-md mx-auto w-full md:w-[75%] "
+            >
+              <TodoItem todo={todo} />
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 };

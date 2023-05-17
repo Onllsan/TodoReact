@@ -1,14 +1,31 @@
-import React from "react";
-import { Todo } from "./ToDoList";
+import React, { useState } from "react";
+import { Todo } from "./TodoList";
 
 interface TodoItemProps {
   todo: Todo;
 }
 
 const TodoItem: React.FC<TodoItemProps> = ({ todo }) => {
+  const [completed, setCompleted] = useState(todo.completed);
+
+  const handleClick = () => {
+    setCompleted(!completed);
+  };
+
   return (
-    <div className="p-4">
-      <div className="text-xl">{todo.description}</div>
+    <div className="flex items-center p-4 gap-4" style={{ cursor: "pointer" }}>
+      <button
+        className={`h-6 w-6 rounded-full border-2 flex-shrink-0 ${
+          completed ? "border-[#f472b6] bg-[#f9a8d4]" : "border-gray-300"
+        }`}
+        onClick={handleClick}
+      />
+      <div
+        className={`ml-4 text-md ${completed ? "text-stone-500" : ""}`}
+        onClick={handleClick}
+      >
+        {todo.description}
+      </div>
     </div>
   );
 };

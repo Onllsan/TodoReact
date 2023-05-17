@@ -14,3 +14,7 @@ endpoints:
                 description: !Fake sentence
               - id: !Fake uuid
                 description: !Fake sentence
+              - id: !Fake uuid
+                description: !Fake sentence
+              - id: !Fake uuid
+                description: !Fake sentence

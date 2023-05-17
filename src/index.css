@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+  background-image: url(/zebra.svg);
+  background-repeat: no-repeat;
+  height: 100vh;
+  overflow: hidden;
+  font-family: sans-serif;
+}
