@@ -9,6 +9,7 @@ const GET_TODOS = gql`
     todos {
       id
       description
+      done
     }
   }
 `;

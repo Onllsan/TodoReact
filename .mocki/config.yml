@@ -18,47 +18,40 @@
 #                 description: !Fake sentence
 #               - id: !Fake uuid
 #                 description: !Fake sentence
-name: mocki
-port: 4000
 endpoints:
-  - path: /graphql
-    method: post
-    responses:
-      - statusCode: 200
-        body:
-          data:
-            schema:
-              query: Query
-              mutation: Mutation
-              types:
-                - name: Query
-                  fields:
-                    todos:
-                      type: [Todo!]
-                      resolve:
-                        static:
-                          - id: !Fake uuid
-                            description: !Fake sentence
-                          - id: !Fake uuid
-                            description: !Fake sentence
-                          - id: !Fake uuid
-                            description: !Fake sentence
-                          - id: !Fake uuid
-                            description: !Fake sentence
-                          - id: !Fake uuid
-                            description: !Fake sentence
-                - name: Mutation
-                  fields:
-                    updateTodo:
-                      type: Todo
-                      args:
-                        id: ID!
-                        description: String
-                      resolve:
-                        static:
-                          id: "abc"
-                          description: "Updated todo"
-                - name: Todo
-                  fields:
-                    id: ID!
-                    description: String!
+  - path: "/"
+    method: POST
+    actions:
+      - action: graphql
+        schema: |
+          type Todo {
+            id: String!
+            description: String!
+            done: Boolean!
+          }
+
+          type Query {
+            todos: [Todo!]!
+            todo(id: String!): Todo
+          }
+
+          type Mutation {
+            updateTodo(input: {id: String!, done: Boolean!}): Todo
+          }
+        resolvers:
+          Query:
+            todos:
+              data:
+                - id: "df19d1c6-70b1-4c23-9d04-9e6d31b35cf7"
+                  description: "Go to the dentist"
+                  done: false
+                - id: "87a2891b-9876-499d-984c-f14c3cb6d5a1"
+                  description: "Mow the lawn"
+                  done: true
+                # Ajoutez d'autres todos ici
+          Mutation:
+            updateTodo:
+              data:
+                id: "abc"
+                description: "Updated todo"
+                done: true

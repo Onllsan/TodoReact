@@ -7,10 +7,11 @@ interface TodoItemProps {
 }
 
 const UPDATE_TODO = gql`
-  mutation UpdateTodo($id: ID!, $description: String!) {
-    updateTodo(id: $id, description: $description) {
+  mutation UpdateTodo($id: ID!, $description: String!, $done: Boolean!) {
+    updateTodo(input: { id: $id, description: $description, done: $done }) {
       id
       description
+      done
     }
   }
 `;
@@ -37,6 +38,7 @@ const TodoItem: React.FC<TodoItemProps> = ({ todo }) => {
       variables: {
         id: todo.id,
         description: todo.description,
+        done: !completed,
       },
     });
   };
