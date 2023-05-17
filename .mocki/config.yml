@@ -19,7 +19,7 @@
 #               - id: !Fake uuid
 #                 description: !Fake sentence
 endpoints:
-  - path: "/"
+  - path: "/graphql"
     method: POST
     actions:
       - action: graphql
