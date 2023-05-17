@@ -27,7 +27,7 @@ endpoints:
         body:
           - id: !Fake uuid
             description: !Fake words
-            completed: !Fake
+            completed: !Fake boolean
 
   - path: /todos/{id}
     method: put
@@ -35,5 +35,5 @@ endpoints:
       - statusCode: 200
         body:
           id: params.id
-          description: params.title
+          description: params.description
           completed: params.completed
