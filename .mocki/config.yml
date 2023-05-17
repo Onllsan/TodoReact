@@ -10,16 +10,16 @@ endpoints:
             todos:
               - id: !Fake uuid
                 description: !Fake sentence
-                completed: false
+                completed: true | false
+              - id: !Fake uuid
+                description: !Fake sentence
+                completed: true | false
               - id: !Fake uuid
                 description: !Fake sentence
                 completed: false
               - id: !Fake uuid
                 description: !Fake sentence
-                completed: false
+                completed: true | false
               - id: !Fake uuid
                 description: !Fake sentence
-                completed: false
-              - id: !Fake uuid
-                description: !Fake sentence
-                completed: false
+                completed: true | false
