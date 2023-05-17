@@ -1,20 +1,64 @@
+# name: mocki
+# port: 4000
+# endpoints:
+#   - path: /graphql
+#     method: get
+#     responses:
+#       - statusCode: 200
+#         body:
+#           data:
+#             todos:
+#               - id: !Fake uuid
+#                 description: !Fake sentence
+#               - id: !Fake uuid
+#                 description: !Fake sentence
+#               - id: !Fake uuid
+#                 description: !Fake sentence
+#               - id: !Fake uuid
+#                 description: !Fake sentence
+#               - id: !Fake uuid
+#                 description: !Fake sentence
 name: mocki
 port: 4000
 endpoints:
   - path: /graphql
-    method: get
+    method: post
     responses:
       - statusCode: 200
         body:
           data:
-            todos:
-              - id: !Fake uuid
-                description: !Fake sentence
-              - id: !Fake uuid
-                description: !Fake sentence
-              - id: !Fake uuid
-                description: !Fake sentence
-              - id: !Fake uuid
-                description: !Fake sentence
-              - id: !Fake uuid
-                description: !Fake sentence
+            schema:
+              query: Query
+              mutation: Mutation
+              types:
+                - name: Query
+                  fields:
+                    todos:
+                      type: [Todo!]
+                      resolve:
+                        static:
+                          - id: !Fake uuid
+                            description: !Fake sentence
+                          - id: !Fake uuid
+                            description: !Fake sentence
+                          - id: !Fake uuid
+                            description: !Fake sentence
+                          - id: !Fake uuid
+                            description: !Fake sentence
+                          - id: !Fake uuid
+                            description: !Fake sentence
+                - name: Mutation
+                  fields:
+                    updateTodo:
+                      type: Todo
+                      args:
+                        id: ID!
+                        description: String
+                      resolve:
+                        static:
+                          id: "abc"
+                          description: "Updated todo"
+                - name: Todo
+                  fields:
+                    id: ID!
+                    description: String!

@@ -3,10 +3,12 @@
 @tailwind utilities;
 
 body {
-  /* background-image: url(/zebra.svg);
+  /* background-image: url(/illu.svg);
+  background-position: bottom right;
+
   background-repeat: no-repeat;
-  height: 100vh;
-  overflow: hidden; */
+  */
+
   background-color: #ddd6fe;
   font-family: Arial, Helvetica, sans-serif;
 }
