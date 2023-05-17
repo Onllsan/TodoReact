@@ -13,15 +13,18 @@ const TodoItem: React.FC<TodoItemProps> = ({ todo }) => {
   };
 
   return (
-    <div className="flex items-center p-4 gap-4" style={{ cursor: "pointer" }}>
+    <div
+      className="flex items-center p-4 gap-4  "
+      style={{ cursor: "pointer" }}
+    >
       <button
         className={`h-6 w-6 rounded-full border-2 flex-shrink-0 ${
-          completed ? "border-[#f472b6] bg-[#f9a8d4]" : "border-gray-300"
+          completed ? "border-[#D1A1B5] bg-[#E8B7CB]" : "border-gray-300"
         }`}
         onClick={handleClick}
       />
       <div
-        className={`ml-4 text-md ${completed ? "text-stone-500" : ""}`}
+        className={`ml-4 text-md ${completed ? "opacity-50" : ""}`}
         onClick={handleClick}
       >
         {todo.description}
