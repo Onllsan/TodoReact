@@ -1,21 +1,73 @@
+# name: mocki
+# port: 4000
+# endpoints:
+#   - path: /graphql
+#     method: get
+#     responses:
+#       - statusCode: 200
+#         body:
+#           data:
+#             todos:
+#               - id: !Fake uuid
+#                 description: !Fake sentence
+#               - id: !Fake uuid
+#                 description: !Fake sentence
+#               - id: !Fake uuid
+#                 description: !Fake sentence
+#               - id: !Fake uuid
+#                 description: !Fake sentence
+#               - id: !Fake uuid
+#                 description: !Fake sentence
 name: mocki
-port: 4000
+port: 3001
+references:
+  - type: collection
+    id: todos
+    data:
+      - id: "1"
+        description: "Todo 1"
+        completed: false
+      - id: "2"
+        description: "Todo 2"
+        completed: false
+      - id: "3"
+        description: "Todo 3"
+        completed: false
 endpoints:
-  - path: /graphql
+  - path: /todos
     method: get
     responses:
       - statusCode: 200
         body:
-          data:
-            todos:
-              - id: !Fake uuid
-                description: !Fake sentence
-              - id: !Fake uuid
-                description: !Fake sentence
-              - id: !Fake uuid
-                description: !Fake sentence
-                completed: false
-              - id: !Fake uuid
-                description: !Fake sentence
-              - id: !Fake uuid
-                description: !Fake sentence
+          $ref:
+            type: collection
+            id: todos
+  - path: /todos/:id
+    method: get
+    responses:
+      - statusCode: 200
+        body:
+          $ref:
+            type: collection
+            id: todos
+            find: id
+  - path: /todos/:id
+    method: put
+    behavior: update
+    request:
+      contentType: application/json
+      schema:
+        type: object
+        properties:
+          description:
+            type: string
+          completed:
+            type: boolean
+        required: ["description", "completed"]
+    responses:
+      - statusCode: 200
+        body:
+          $ref:
+            type: collection
+            id: todos
+            update: id

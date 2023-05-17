@@ -4,7 +4,6 @@ const httpLink = createHttpLink({
   uri: "https://api.mocki.io/v2/af15a317/graphql",
 });
 
-// Create the Apollo client
 const client = new ApolloClient({
   link: httpLink,
   cache: new InMemoryCache(),
