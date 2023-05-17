@@ -17,7 +17,7 @@ const GET_TODOS = gql`
 export interface Todo {
   id: string;
   description: string;
-  completed: boolean;
+  done: boolean;
 }
 
 const TodoList: React.FC = () => {

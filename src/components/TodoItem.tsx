@@ -19,26 +19,26 @@ const UPDATE_TODO = gql`
 const TodoItem: React.FC<TodoItemProps> = ({ todo }) => {
   const initialState = JSON.parse(localStorage.getItem(todo.id) || "false");
   const [updateTodo] = useMutation(UPDATE_TODO);
-  const [completed, setCompleted] = useState(initialState);
+  const [done, setDone] = useState(initialState);
   const [showToast, setShowToast] = useState(false);
 
   useEffect(() => {
-    localStorage.setItem(todo.id, JSON.stringify(completed));
-    if (completed) {
+    localStorage.setItem(todo.id, JSON.stringify(done));
+    if (done) {
       setShowToast(true);
       setTimeout(() => {
         setShowToast(false);
       }, 2000);
     }
-  }, [completed, todo.id]);
+  }, [done, todo.id]);
 
   const handleClick = () => {
-    setCompleted(!completed);
+    setDone(!done);
     updateTodo({
       variables: {
         id: todo.id,
         description: todo.description,
-        done: !completed,
+        done: !done,
       },
     });
   };
@@ -51,14 +51,12 @@ const TodoItem: React.FC<TodoItemProps> = ({ todo }) => {
       >
         <button
           className={`h-6 w-6 rounded-full border-2 flex-shrink-0 ${
-            completed ? "border-[#D1A1B5] bg-[#E8B7CB]" : "border-gray-300"
+            done ? "border-[#D1A1B5] bg-[#E8B7CB]" : "border-gray-300"
           }`}
           onClick={handleClick}
         />
         <div
-          className={`ml-4 text-md mx-auto w-full ${
-            completed ? "opacity-50" : ""
-          }`}
+          className={`ml-4 text-md mx-auto w-full ${done ? "opacity-50" : ""}`}
           onClick={handleClick}
         >
           {todo.description}
