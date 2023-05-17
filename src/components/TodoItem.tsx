@@ -1,46 +1,27 @@
 import React, { useState, useEffect } from "react";
 import { Todo } from "./TodoList";
-import { useMutation, gql } from "@apollo/client";
 
 interface TodoItemProps {
   todo: Todo;
 }
 
-const UPDATE_TODO = gql`
-  mutation UpdateTodo($id: ID!, $description: String!, $done: Boolean!) {
-    updateTodo(input: { id: $id, description: $description, done: $done }) {
-      id
-      description
-      done
-    }
-  }
-`;
-
 const TodoItem: React.FC<TodoItemProps> = ({ todo }) => {
   const initialState = JSON.parse(localStorage.getItem(todo.id) || "false");
-  const [updateTodo] = useMutation(UPDATE_TODO);
-  const [done, setDone] = useState(initialState);
+  const [completed, setCompleted] = useState(initialState);
   const [showToast, setShowToast] = useState(false);
 
   useEffect(() => {
-    localStorage.setItem(todo.id, JSON.stringify(done));
-    if (done) {
+    localStorage.setItem(todo.id, JSON.stringify(completed));
+    if (completed) {
       setShowToast(true);
       setTimeout(() => {
         setShowToast(false);
       }, 2000);
     }
-  }, [done, todo.id]);
+  }, [completed, todo.id]);
 
   const handleClick = () => {
-    setDone(!done);
-    updateTodo({
-      variables: {
-        id: todo.id,
-        description: todo.description,
-        done: !done,
-      },
-    });
+    setCompleted(!completed);
   };
 
   return (
@@ -51,12 +32,14 @@ const TodoItem: React.FC<TodoItemProps> = ({ todo }) => {
       >
         <button
           className={`h-6 w-6 rounded-full border-2 flex-shrink-0 ${
-            done ? "border-[#D1A1B5] bg-[#E8B7CB]" : "border-gray-300"
+            completed ? "border-[#D1A1B5] bg-[#E8B7CB]" : "border-gray-300"
           }`}
           onClick={handleClick}
         />
         <div
-          className={`ml-4 text-md mx-auto w-full ${done ? "opacity-50" : ""}`}
+          className={`ml-4 text-md mx-auto w-full ${
+            completed ? "opacity-50" : ""
+          }`}
           onClick={handleClick}
         >
           {todo.description}
