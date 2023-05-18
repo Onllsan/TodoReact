@@ -55,7 +55,7 @@ const TodoList: React.FC = () => {
   return (
     <>
       <Heading />
-      <div className="flex items-center justify-center flex-col m-9 ">
+      <div className="flex items-center justify-center flex-col mx-9 mt-7 md:mt-5">
         <div className="container">
           <div>
             {data.todos.map((todo: Todo) => (
