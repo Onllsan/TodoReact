@@ -1,30 +1,61 @@
 import React, { useState, useEffect } from "react";
 import { Todo } from "./TodoList";
 import { BsCheckLg } from "react-icons/bs";
+import { gql, useMutation } from "@apollo/client";
 
 interface TodoItemProps {
   todo: Todo;
 }
 
+const UPDATE_TODO = gql`
+  mutation UpdateTodo($id: ID!, $done: Boolean!) {
+    updateTodo(input: { id: $id, done: $done }) {
+      id
+      done
+    }
+  }
+`;
+
+// const TodoItem: React.FC<TodoItemProps> = ({ todo }) => {
+//   const initialState = JSON.parse(localStorage.getItem(todo.id) || "false");
+//   const [completed, setCompleted] = useState(initialState);
+//   const [showToast, setShowToast] = useState(false);
+
+//   useEffect(() => {
+//     localStorage.setItem(todo.id, JSON.stringify(completed));
+//     if (completed) {
+//       setShowToast(true);
+//       setTimeout(() => {
+//         setShowToast(false);
+//       }, 2000);
+//     }
+//   }, [completed, todo.id]);
+
+//   const handleClick = () => {
+//     setCompleted(!completed);
+//   };
 const TodoItem: React.FC<TodoItemProps> = ({ todo }) => {
   const initialState = JSON.parse(localStorage.getItem(todo.id) || "false");
-  const [completed, setCompleted] = useState(initialState);
+  const [done, setDone] = useState(initialState);
   const [showToast, setShowToast] = useState(false);
+  const [updateTodo] = useMutation(UPDATE_TODO);
 
   useEffect(() => {
-    localStorage.setItem(todo.id, JSON.stringify(completed));
-    if (completed) {
+    localStorage.setItem(todo.id, JSON.stringify(done));
+    if (done) {
       setShowToast(true);
       setTimeout(() => {
         setShowToast(false);
       }, 2000);
     }
-  }, [completed, todo.id]);
+  }, [done, todo.id]);
 
   const handleClick = () => {
-    setCompleted(!completed);
+    updateTodo({
+      variables: { id: todo.id, done: !done },
+    });
+    setDone(!done);
   };
-
   return (
     <>
       <div
@@ -33,16 +64,16 @@ const TodoItem: React.FC<TodoItemProps> = ({ todo }) => {
       >
         <button
           className={`flex items-center justify-center h-8 w-8 rounded-full border-2 flex-shrink-0 ${
-            completed ? "border-[#D1A1B5] bg-[#E8B7CB]" : "border-gray-300"
+            done ? "border-[#D1A1B5] bg-[#E8B7CB]" : "border-gray-300"
           }`}
           onClick={handleClick}
         >
-          {completed && <BsCheckLg className="text-white" />}
+          {done && <BsCheckLg className="text-white" />}
         </button>
 
         <div
           className={`ml-4 text-md mx-auto w-full ${
-            completed ? "opacity-50 line-through decoration-1" : ""
+            done ? "opacity-50 line-through decoration-1" : ""
           }`}
           onClick={handleClick}
         >

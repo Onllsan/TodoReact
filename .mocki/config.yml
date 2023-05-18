@@ -21,35 +21,46 @@
 name: mocki
 port: 4000
 endpoints:
-  - path: /graphql
-    method: get
-    responses:
-      - statusCode: 200
-        body:
-          data:
-            todos:
-              - id: "df19d1c6-70b1-4c23-9d04-9e6d31b35cf7"
-                description: "Go to the dentist"
-                done: false
-              - id: "87a2891b-9876-499d-984c-f14c3cb6d5a1"
-                description: "Mow the lawn"
-                done: false
-              - id: "82d977eb-5a91-426f-83e7-fb877af45488"
-                description: "Fix the leaking sink"
-                done: true
-              - id: "7450af2e-7d00-451f-8310-8f8e82c66259"
-                description: "Water the plants"
-                done: false
-              - id: !Fake uuid
-                description: "Call Karen regarding her recent complaints"
-                done: false
-  - path: /graphql
+  - path: "/graphql"
     method: post
-    responses:
-      - statusCode: 200
-        body:
-          data:
-            updateTodo:
-              id: "df19d1c6-70b1-4c23-9d04-9e6d31b35cf7"
-              description: "Go to the dentist"
-              done: true
+    graphql:
+      schema: |
+        type Query {
+          getTodos: [Todo!]!
+        }
+
+        type Mutation {
+          updateTodo(input: UpdateTodoInput!): Todo
+        }
+
+        type Todo {
+          id: ID!
+          description: String!
+          done: Boolean!
+        }
+
+        input UpdateTodoInput {
+          id: ID!
+          done: Boolean
+        }
+      mocks:
+        Todo:
+          - id: "df19d1c6-70b1-4c23-9d04-9e6d31b35cf7"
+            description: "Go to the dentist"
+            done: false
+          - id: "87a2891b-9876-499d-984c-f14c3cb6d5a1"
+            description: "Mow the lawn"
+            done: true
+          - id: "82d977eb-5a91-426f-83e7-fb877af45488"
+            description: "Fix the leaking sink"
+            done: true
+          - id: "7450af2e-7d00-451f-8310-8f8e82c66259"
+            description: "Water the plants"
+            done: false
+          - id: "cc6b66a5-2b89-4b21-bde4-5a80f2e02647"
+            description: "Call Karen regarding her recent complaints"
+            done: false
+        Query:
+          getTodos: "@todo.list"
+        Mutation:
+          updateTodo: "@todo.one"
