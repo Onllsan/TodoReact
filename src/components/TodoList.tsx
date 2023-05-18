@@ -2,7 +2,6 @@ import React from "react";
 import { useQuery, gql } from "@apollo/client";
 import TodoItem from "./TodoItem";
 import Heading from "./Heading";
-import Footer from "./Footer";
 
 const GET_TODOS = gql`
   query GetTodos {
@@ -29,7 +28,7 @@ const TodoList: React.FC = () => {
       <div className="flex justify-center items-center h-screen" role="status">
         <svg
           aria-hidden="true"
-          className="w-8 h-8 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
+          className="w-8 h-8 mr-2 text-white animate-spin fill-[#D1A1B5]"
           viewBox="0 0 100 101"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
@@ -65,7 +64,6 @@ const TodoList: React.FC = () => {
           </div>
         </div>
       </div>
-      <Footer />
     </>
   );
 };

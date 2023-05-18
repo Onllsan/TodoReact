@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Todo } from "./TodoList";
+import { BsCheckLg } from "react-icons/bs";
 
 interface TodoItemProps {
   todo: Todo;
@@ -31,14 +32,17 @@ const TodoItem: React.FC<TodoItemProps> = ({ todo }) => {
         style={{ cursor: "pointer" }}
       >
         <button
-          className={`h-6 w-6 rounded-full border-2 flex-shrink-0 ${
+          className={`flex items-center justify-center h-8 w-8 rounded-full border-2 flex-shrink-0 ${
             completed ? "border-[#D1A1B5] bg-[#E8B7CB]" : "border-gray-300"
           }`}
           onClick={handleClick}
-        />
+        >
+          {completed && <BsCheckLg className="text-white" />}
+        </button>
+
         <div
           className={`ml-4 text-md mx-auto w-full ${
-            completed ? "opacity-50" : ""
+            completed ? "opacity-50 line-through decoration-1" : ""
           }`}
           onClick={handleClick}
         >
@@ -48,7 +52,7 @@ const TodoItem: React.FC<TodoItemProps> = ({ todo }) => {
       {showToast && (
         <div
           id="toast-success"
-          className="fixed inline-flex top-0 left-0 max-w-xs p-4 mt-4 ml-4 text-black bg-white rounded-lg shadow"
+          className=" fixed inline-flex top-0 left-0 max-w-xs p-4 mt-4 ml-4 text-black bg-white rounded-lg shadow-md"
           role="alert"
         >
           <div className="inline-flex items-center justify-center flex-shrink-0">

@@ -1,3 +1,23 @@
+# name: mocki
+# port: 4000
+# endpoints:
+#   - path: /graphql
+#     method: get
+#     responses:
+#       - statusCode: 200
+#         body:
+#           data:
+#             todos:
+#               - id: "df19d1c6-70b1-4c23-9d04-9e6d31b35cf7"
+#                 description: "Go to the dentist"
+#               - id: "87a2891b-9876-499d-984c-f14c3cb6d5a1"
+#                 description: "Mow the lawn"
+#               - id: "82d977eb-5a91-426f-83e7-fb877af45488"
+#                 description: "Fix the leaking sink"
+#               - id: "7450af2e-7d00-451f-8310-8f8e82c66259"
+#                 description: "Water the plants"
+#               - id: !Fake uuid
+#                 description: "Call Karen regarding her recent complaints"
 name: mocki
 port: 4000
 endpoints:
@@ -10,48 +30,26 @@ endpoints:
             todos:
               - id: "df19d1c6-70b1-4c23-9d04-9e6d31b35cf7"
                 description: "Go to the dentist"
+                done: false
               - id: "87a2891b-9876-499d-984c-f14c3cb6d5a1"
                 description: "Mow the lawn"
+                done: false
               - id: "82d977eb-5a91-426f-83e7-fb877af45488"
                 description: "Fix the leaking sink"
+                done: true
               - id: "7450af2e-7d00-451f-8310-8f8e82c66259"
                 description: "Water the plants"
+                done: false
               - id: !Fake uuid
                 description: "Call Karen regarding her recent complaints"
-# endpoints:
-#   - path: "/graphql"
-#     method: POST
-#     actions:
-#       - action: graphql
-#         schema: |
-#           type Todo {
-#             id: String!
-#             description: String!
-#             done: Boolean!
-#           }
-
-#           type Query {
-#             todos: [Todo!]!
-#             todo(id: String!): Todo
-#           }
-
-#           type Mutation {
-#             updateTodo(input: {id: String!, done: Boolean!}): Todo
-#           }
-#         resolvers:
-#           Query:
-#             todos:
-#               data:
-#                 - id: "df19d1c6-70b1-4c23-9d04-9e6d31b35cf7"
-#                   description: "Go to the dentist"
-#                   done: false
-#                 - id: "87a2891b-9876-499d-984c-f14c3cb6d5a1"
-#                   description: "Mow the lawn"
-#                   done: true
-#                 # Ajoutez d'autres todos ici
-#           Mutation:
-#             updateTodo:
-#               data:
-#                 id: "abc"
-#                 description: "Updated todo"
-#                 done: true
+                done: false
+  - path: /graphql
+    method: post
+    responses:
+      - statusCode: 200
+        body:
+          data:
+            updateTodo:
+              id: "df19d1c6-70b1-4c23-9d04-9e6d31b35cf7"
+              description: "Go to the dentist"
+              done: true
