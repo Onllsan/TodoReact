@@ -43,22 +43,22 @@ endpoints:
               - id: "ebc03482-2620-4d25-8c04-d9486a707bb0"
                 description: "Call Karen regarding her recent complaints"
                 done: false
-    schema: |
-      type Todo {
-        id: ID!
-        description: String!
-        done: Boolean!
-      }
+    # schema: |
+    #   type Todo {
+    #     id: ID!
+    #     description: String!
+    #     done: Boolean!
+    #   }
 
-      type Query {
-        todos: [Todo]
-      }
+    #   type Query {
+    #     todos: [Todo]
+    #   }
 
-      input UpdateTodoInput {
-        id: ID!
-        done: Boolean!
-      }
+    #   input UpdateTodoInput {
+    #     id: ID!
+    #     done: Boolean!
+    #   }
 
-      type Mutation {
-        updateTodo(input: UpdateTodoInput!): Todo
-      }
+    #   type Mutation {
+    #     updateTodo(input: UpdateTodoInput!): Todo
+    #   }
