@@ -45,7 +45,12 @@ const TodoList: React.FC = () => {
         <span className="sr-only">Loading...</span>
       </div>
     );
-  if (error) return <p>Error :</p>;
+  if (error)
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <img src="Error404.svg" alt="Error 404" className="w-1/2" />
+      </div>
+    );
 
   return (
     <>
