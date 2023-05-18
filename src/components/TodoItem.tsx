@@ -1,3 +1,62 @@
+// import React, { useState, useEffect } from "react";
+// import { Todo } from "./TodoList";
+// import { BsCheckLg } from "react-icons/bs";
+// import { gql, useMutation } from "@apollo/client";
+
+// interface TodoItemProps {
+//   todo: Todo;
+// }
+
+// const UPDATE_TODO = gql`
+//   mutation UpdateTodo($id: ID!, $done: Boolean!) {
+//     updateTodo(input: { id: $id, done: $done }) {
+//       id
+//       description
+//       done
+//     }
+//   }
+// `;
+
+// // const TodoItem: React.FC<TodoItemProps> = ({ todo }) => {
+// //   const initialState = JSON.parse(localStorage.getItem(todo.id) || "false");
+// //   const [completed, setCompleted] = useState(initialState);
+// //   const [showToast, setShowToast] = useState(false);
+
+// //   useEffect(() => {
+// //     localStorage.setItem(todo.id, JSON.stringify(completed));
+// //     if (completed) {
+// //       setShowToast(true);
+// //       setTimeout(() => {
+// //         setShowToast(false);
+// //       }, 2000);
+// //     }
+// //   }, [completed, todo.id]);
+
+// //   const handleClick = () => {
+// //     setCompleted(!completed);
+// //   };
+// const TodoItem: React.FC<TodoItemProps> = ({ todo }) => {
+//   const initialState = JSON.parse(localStorage.getItem(todo.id) || "false");
+//   const [done, setDone] = useState(initialState);
+//   const [showToast, setShowToast] = useState(false);
+//   const [updateTodo] = useMutation(UPDATE_TODO);
+
+//   useEffect(() => {
+//     localStorage.setItem(todo.id, JSON.stringify(done));
+//     if (done) {
+//       setShowToast(true);
+//       setTimeout(() => {
+//         setShowToast(false);
+//       }, 2000);
+//     }
+//   }, [done, todo.id]);
+
+//   const handleClick = () => {
+//     updateTodo({
+//       variables: { id: todo.id, done: !done },
+//     });
+//     setDone(!done);
+//   };
 import React, { useState, useEffect } from "react";
 import { Todo } from "./TodoList";
 import { BsCheckLg } from "react-icons/bs";
@@ -17,45 +76,28 @@ const UPDATE_TODO = gql`
   }
 `;
 
-// const TodoItem: React.FC<TodoItemProps> = ({ todo }) => {
-//   const initialState = JSON.parse(localStorage.getItem(todo.id) || "false");
-//   const [completed, setCompleted] = useState(initialState);
-//   const [showToast, setShowToast] = useState(false);
-
-//   useEffect(() => {
-//     localStorage.setItem(todo.id, JSON.stringify(completed));
-//     if (completed) {
-//       setShowToast(true);
-//       setTimeout(() => {
-//         setShowToast(false);
-//       }, 2000);
-//     }
-//   }, [completed, todo.id]);
-
-//   const handleClick = () => {
-//     setCompleted(!completed);
-//   };
 const TodoItem: React.FC<TodoItemProps> = ({ todo }) => {
-  const initialState = JSON.parse(localStorage.getItem(todo.id) || "false");
-  const [done, setDone] = useState(initialState);
+  const [done, setDone] = useState(todo.done);
   const [showToast, setShowToast] = useState(false);
   const [updateTodo] = useMutation(UPDATE_TODO);
 
   useEffect(() => {
-    localStorage.setItem(todo.id, JSON.stringify(done));
     if (done) {
       setShowToast(true);
       setTimeout(() => {
         setShowToast(false);
       }, 2000);
     }
-  }, [done, todo.id]);
+  }, [done]);
 
-  const handleClick = () => {
-    updateTodo({
+  const handleClick = async () => {
+    const response = await updateTodo({
       variables: { id: todo.id, done: !done },
     });
-    setDone(!done);
+
+    if (response.data) {
+      setDone(response.data.updateTodo.done);
+    }
   };
   return (
     <>
