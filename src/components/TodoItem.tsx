@@ -66,7 +66,7 @@ const TodoItem: React.FC<TodoItemProps> = ({ todo }) => {
       {showToast && (
         <div
           id="toast-success"
-          className=" fixed inline-flex top-0 left-0 max-w-xs p-4 mt-4 ml-4 text-black bg-white rounded-lg shadow-md"
+          className=" fixed inline-flex top-0 left-0 max-w-xs p-4 mt-4 ml-4 text-black bg-white rounded-lg shadow-custom"
           role="alert"
         >
           <div className="inline-flex items-center justify-center flex-shrink-0">

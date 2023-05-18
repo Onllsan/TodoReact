@@ -60,7 +60,7 @@ const TodoList: React.FC = () => {
           <div>
             {data.todos.map((todo: Todo) => (
               <div
-                className="flex items-center justify-between mb-6 shadow-md shadow-stone-400 border-2 border-stone-200 bg-white rounded-lg mx-auto w-full md:w-[75%]"
+                className="flex items-center justify-between mb-6 shadow-custom  bg-white rounded-lg mx-auto w-full md:w-[75%]"
                 key={todo.id}
               >
                 <TodoItem todo={todo} />
