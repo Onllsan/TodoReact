@@ -33,24 +33,3 @@ endpoints:
           id: !Fake uuid
           title: !Fake words
           completed: !Fake boolean
-
-  - path: /todos
-    method: post
-    behavior: conditional
-    responses:
-      - statusCode: 200
-        condition:
-          operator: eq
-          comparand: headers.authorization
-          value: valid
-        body:
-          message: Todo updated successfully
-      - statusCode: 401
-        condition:
-          operator: eq
-          comparand: headers.authorization
-          value: invalid
-        body:
-          message: invalid header
-
-branchFilter: master|develop
