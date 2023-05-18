@@ -18,42 +18,30 @@
 #                 description: "Water the plants"
 #               - id: !Fake uuid
 #                 description: "Call Karen regarding her recent complaints"
-name: mocki
-port: 4000
 endpoints:
-  - path: /graphql
+  - path: "/graphql"
     method: post
-    responses:
-      - statusCode: 200
-        body:
-          data:
-            todos:
-              - id: "df19d1c6-70b1-4c23-9d04-9e6d31b35cf7"
-                description: "Go to the dentist"
-                done: false
-              - id: "87a2891b-9876-499d-984c-f14c3cb6d5a1"
-                description: "Mow the lawn"
-                done: false
-              - id: "82d977eb-5a91-426f-83e7-fb877af45488"
-                description: "Fix the leaking sink"
-                done: false
-              - id: "7450af2e-7d00-451f-8310-8f8e82c66259"
-                description: "Water the plants"
-                done: false
-              - id: "ebc03482-2620-4d25-8c04-d9486a707bb0"
-                description: "Call Karen regarding her recent complaints"
-                done: false
-    schema: |
-      type Todo {
-        id: ID!
-        description: String!
-        done: Boolean!
-      }
+    graphql:
+      mocks:
+        Todo:
+          id: "8db57b8f-be09-4e07-a1f6-4fb77d9b16e7"
+          description: "An example todo"
+          done: true
+        updateTodo:
+          id: "8db57b8f-be09-4e07-a1f6-4fb77d9b16e7"
+          description: "An example todo"
+          done: true
+      schema: |
+        type Todo {
+          id: ID!
+          description: String!
+          done: Boolean!
+        }
 
-      type Query {
-        todos: [Todo]
-      }
+        type Query {
+          todos: [Todo]
+        }
 
-      type Mutation {
-        updateTodo(id: ID!, done: Boolean!): Todo
-      }
+        type Mutation {
+          updateTodo(id: ID!, done: Boolean!): Todo
+        }
