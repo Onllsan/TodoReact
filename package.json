@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "@apollo/client": "^3.7.14",
+    "@types/graphql": "^14.5.0",
+    "fs": "^0.0.1-security",
     "graphql": "^16.6.0",
     "plyr-react": "^5.2.0",
     "prettier-eslint": "^15.0.1",
