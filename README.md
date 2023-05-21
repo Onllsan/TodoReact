@@ -11,8 +11,8 @@ This application is a simple yet effective todo list built using React, TypeScri
 ## Live Demo
 **[Live Site](https://mytodomocki.netlify.app/)**
 
-![Application Screenshot](![image](https://github.com/Onllsan/TodoReact/assets/114822626/e2402ddf-2fe3-41fb-a73f-3cb116a2cb12))
-![Application Screenshot](![image](https://github.com/Onllsan/TodoReact/assets/114822626/66552f77-ba4a-40d2-809a-946f5a32e8d8))
+![image](https://github.com/Onllsan/TodoReact/assets/114822626/e2402ddf-2fe3-41fb-a73f-3cb116a2cb12)
+![image](https://github.com/Onllsan/TodoReact/assets/114822626/66552f77-ba4a-40d2-809a-946f5a32e8d8)
 
 
 ## Features
