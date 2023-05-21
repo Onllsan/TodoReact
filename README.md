@@ -9,10 +9,11 @@
 This application is a simple yet effective todo list built using React, TypeScript, TailwindCSS and GraphQL. It interacts with a mocked GraphQL database using [Mocki.io](https://www.mocki.io/fake-graphql-api). The primary functions of this application are to retrieve and upload todos.
 
 ## Live Demo
-**[Live Site](https://mytodomocki.netlify.app/)**
+**[Click here to see it live](https://mytodomocki.netlify.app/)**
 
-![image](https://github.com/Onllsan/TodoReact/assets/114822626/e2402ddf-2fe3-41fb-a73f-3cb116a2cb12)
+## Preview
 ![image](https://github.com/Onllsan/TodoReact/assets/114822626/66552f77-ba4a-40d2-809a-946f5a32e8d8)
+![image](https://github.com/Onllsan/TodoReact/assets/114822626/e2402ddf-2fe3-41fb-a73f-3cb116a2cb12)
 
 
 ## Features
